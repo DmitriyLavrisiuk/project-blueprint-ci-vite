@@ -1,0 +1,9 @@
+#!/bin/sh
+# Тесты, которые затрагивают застейдженные файлы.
+files=$(git diff --cached --name-only --diff-filter=ACM -- '*.ts' '*.tsx')
+[ -n "$files" ] || exit 0
+if [ ! -x node_modules/.bin/vitest ]; then
+  echo "pre-commit: нет Vitest — выполни npm install" >&2
+  exit 1
+fi
+printf '%s\n' "$files" | tr '\n' '\0' | xargs -0 node_modules/.bin/vitest related --run --passWithNoTests

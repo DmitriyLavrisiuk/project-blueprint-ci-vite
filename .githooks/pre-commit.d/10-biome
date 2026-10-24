@@ -1,0 +1,7 @@
+#!/bin/sh
+# Линт и формат застейдженных файлов по biome.json.
+if [ ! -x node_modules/.bin/biome ]; then
+  echo "pre-commit: нет Biome — выполни npm install" >&2
+  exit 1
+fi
+exec node_modules/.bin/biome check --staged --no-errors-on-unmatched --files-ignore-unknown=true

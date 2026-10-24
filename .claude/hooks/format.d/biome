@@ -1,0 +1,6 @@
+#!/bin/sh
+# TypeScript, JavaScript, JSON и CSS — форматирование Biome. Только format: check --write удалял бы
+# импорт, который агент добавил и ещё не успел использовать.
+[ -x node_modules/.bin/biome ] || exit 0
+node_modules/.bin/biome format --write --no-errors-on-unmatched --files-ignore-unknown=true "$1"
+exit 0

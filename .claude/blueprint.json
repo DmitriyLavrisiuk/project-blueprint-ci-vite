@@ -1,0 +1,26 @@
+{
+	"version": null,
+	"modules": ["core", "ui", "react", "ci", "pages"],
+	"answers": {
+		"PROJECT_NAME": "e2e-vite",
+		"ONE_LINER": "Тестовый проект скилла: React, ветка vite.",
+		"V1_DONE": "Первая страница открывается на проде, проверки зелёные.",
+		"BRANCH_RULE": "Работаем в main; ветку заводим по решению владельца.",
+		"VERSION": "не выпущен",
+		"DATE": "2026-10-24",
+		"COMMANDS": "npm run dev        # сервер разработки\nnpm run lint       # Biome: линт и формат\nnpm run format     # Biome: формат\nnpm run typecheck  # tsc -b\nnpm test           # Vitest\nnpm run build      # сборка",
+		"RULES": "- Правил, которые не проверит линтер, пока нет: дополним по мере работы.",
+		"SENSITIVE_AREAS": "безопасность, миграции",
+		"NEXT_VERSION": "0.1",
+		"NEXT_GOAL": "первая страница",
+		"NEXT_TASKS": "- [ ] Первая страница → проверка: открывается локально",
+		"LATER": "- Запуск v1.0",
+		"UI_PROCESS": "Вид нового компонента решается артефактом: варианты рядом, на реальных данных, с переключением темы и ширины. Владелец выбирает вариант, код — после его ответа.",
+		"TOKENS_SOURCE": "`src/index.css`",
+		"CSS_CONVENTION": "Классы Tailwind — целыми литералами, цвета — семантическими токенами shadcn",
+		"BREAKPOINTS": "640, 768, 1024, 1280 px",
+		"SHADCN_BASE": "base",
+		"SHADCN_PRESET": "nova",
+		"NODE_MAJOR": "22"
+	}
+}

@@ -1,0 +1,58 @@
+# Те же проверки, что перед коммитом и выпуском. Команды — скрипты package.json и composer.json,
+# поэтому файл один для любого стека: шаг без своего скрипта или файла проекта пропускается.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      # Теги нужны проверке docs: она сверяет версию с последним тегом.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+
+      - if: hashFiles('composer.json') != ''
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: latest
+          tools: composer
+      - if: hashFiles('composer.json') != ''
+        run: composer install --no-interaction --no-progress
+      - if: hashFiles('composer.json') != ''
+        run: composer lint
+
+      - run: npm run lint --if-present
+      - run: npm run lint:css --if-present
+      - run: npm run lint:js --if-present
+      - run: npm run typecheck --if-present
+      - run: npm run test:env --if-present
+      - run: npm test --if-present
+      - run: npm run build --if-present
+      - if: hashFiles('scripts/check-docs.mjs') != ''
+        run: node scripts/check-docs.mjs
+
+      - if: hashFiles('supabase/config.toml') != ''
+        uses: supabase/setup-cli@v3
+        with:
+          version: latest
+      - if: hashFiles('supabase/config.toml') != ''
+        run: supabase db start && supabase test db

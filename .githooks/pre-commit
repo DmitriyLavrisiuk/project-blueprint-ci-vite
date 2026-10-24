@@ -1,0 +1,10 @@
+#!/bin/sh
+# Проверки перед коммитом: каждая — исполняемый файл в .githooks/pre-commit.d/, по порядку имён.
+# Профили стека кладут туда свои линтеры; первая упавшая проверка останавливает коммит.
+# В свежем клоне хук включает git config core.hooksPath .githooks.
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+for check in .githooks/pre-commit.d/*; do
+  [ -x "$check" ] || continue
+  "$check" || exit 1
+done

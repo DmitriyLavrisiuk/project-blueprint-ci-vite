@@ -1,0 +1,20 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+	"files": {
+		"ignoreUnknown": true,
+		"includes": [
+			"**",
+			"!**/*.md",
+			"!public",
+			"!scripts/check-docs.mjs",
+			"!scripts/bump-version.mjs"
+		]
+	},
+	"formatter": { "lineWidth": 100 },
+	"css": { "parser": { "tailwindDirectives": true } },
+	"linter": {
+		"rules": { "correctness": { "noUnusedImports": "error", "noUnusedVariables": "error" } }
+	},
+	"assist": { "actions": { "source": { "organizeImports": "on" } } }
+}

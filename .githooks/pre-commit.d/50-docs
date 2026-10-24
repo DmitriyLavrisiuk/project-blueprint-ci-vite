@@ -1,0 +1,3 @@
+#!/bin/sh
+# Документация сходится с кодом — docs/README.md, раздел «Проверка».
+exec node scripts/check-docs.mjs

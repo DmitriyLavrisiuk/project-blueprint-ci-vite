@@ -1,0 +1,9 @@
+{
+	"code": ["src"],
+	"namedDocs": [
+		{
+			"dir": "docs/ui/components",
+			"match": ["src/components/{slug}.tsx", "src/components/ui/{slug}.tsx"]
+		}
+	]
+}
